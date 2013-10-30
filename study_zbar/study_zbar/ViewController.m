@@ -34,11 +34,16 @@
 {
     NSLog(@"%s",__func__);
     id<NSFastEnumeration> results = [info objectForKey:ZBarReaderControllerResults];
-    ZBarSymbol *symbol = nil;
-    for (symbol in results) {
-        self.resultText.text = symbol.data;
-        self.resultImage.image = [info objectForKey:UIImagePickerControllerOriginalImage];
-        [reader dismissViewControllerAnimated:YES completion:nil];
+    ZBarSymbol *symbol = nil; 
+    NSMutableArray *ary = [@[] mutableCopy];
+    for (symbol in results) [ary addObject:symbol.data];
+    NSLog(@"%@",ary);
+    NSMutableString *barcodeText = [@"" mutableCopy];
+    for (NSString *s in ary) {
+        [barcodeText appendString:s];
+        [barcodeText appendString:@"\n"];
     }
+    self.resultText.text = barcodeText;
+    [reader dismissViewControllerAnimated:YES completion:nil];
 }
 @end

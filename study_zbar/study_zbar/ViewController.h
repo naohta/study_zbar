@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UIViewController <ZBarReaderDelegate>
-@property (weak, nonatomic) IBOutlet UIImageView *resultImage;
 @property (weak, nonatomic) IBOutlet UITextView *resultText;
 - (IBAction)scanButtonTapped:(id)sender;
 @end
