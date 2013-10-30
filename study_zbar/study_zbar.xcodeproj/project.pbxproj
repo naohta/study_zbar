@@ -102,10 +102,6 @@
 		3594CC5F17B23AEF003A1FED = {
 			isa = PBXGroup;
 			children = (
-				3594CCB917B23EC8003A1FED /* CoreVideo.framework */,
-				3594CCB717B23EBE003A1FED /* CoreMedia.framework */,
-				3594CCB517B23EB0003A1FED /* AVFoundation.framework */,
-				3594CCB317B23B97003A1FED /* libiconv.dylib */,
 				3594CC7117B23AEF003A1FED /* study_zbar */,
 				3594CC6A17B23AEF003A1FED /* Frameworks */,
 				3594CC6917B23AEF003A1FED /* Products */,
@@ -123,11 +119,15 @@
 		3594CC6A17B23AEF003A1FED /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3594CCB117B23B80003A1FED /* QuartzCore.framework */,
 				3594CC8E17B23B0A003A1FED /* ZBarSDK */,
+				3594CCB917B23EC8003A1FED /* CoreVideo.framework */,
+				3594CCB717B23EBE003A1FED /* CoreMedia.framework */,
+				3594CCB517B23EB0003A1FED /* AVFoundation.framework */,
+				3594CCB117B23B80003A1FED /* QuartzCore.framework */,
 				3594CC6B17B23AEF003A1FED /* UIKit.framework */,
 				3594CC6D17B23AEF003A1FED /* Foundation.framework */,
 				3594CC6F17B23AEF003A1FED /* CoreGraphics.framework */,
+				3594CCB317B23B97003A1FED /* libiconv.dylib */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -426,6 +426,7 @@
 				3594CC8D17B23AEF003A1FED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
