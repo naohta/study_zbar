@@ -14,8 +14,7 @@
     [super viewDidLoad];
     self.readerView.readerDelegate = self;
     if(TARGET_IPHONE_SIMULATOR) {
-        self.cameraSim = [[ZBarCameraSimulator alloc]
-                     initWithViewController: self];
+        self.cameraSim = [[ZBarCameraSimulator alloc] initWithViewController: self];
         self.cameraSim.readerView = self.readerView;
     }
 }
@@ -39,30 +38,24 @@
     }
 }
 
+/*
 - (IBAction)scanButtonTapped_OLD2:(id)sender {
     NSLog(@"%s",__func__);
-    
     ZBarImageScanner *scanner = [[ZBarImageScanner alloc] init];
     [scanner setSymbology:ZBAR_I25 config:ZBAR_CFG_ENABLE to:0];
-
     ZBarReaderView *reader = [[ZBarReaderView alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
     //ZBarReaderView *reader = [[ZBarReaderView alloc] initWithImageScanner:scanner];
     //[reader ]
     reader.backgroundColor = [UIColor blueColor];
     reader.readerDelegate = self;
     [self.view addSubview:reader];
-    [globalVarAppDelegate.window bringSubviewToFront:reader];
-}
-
-- (IBAction)scanButtonTapped___dd____:(id)sender {
-    NSLog(@"%s",__func__);
-    AVCaptureSession *session = [[AVCaptureSession alloc] init];
-    //ZBarCaptureReader
-    [session startRunning];
-}
+    [globalVarAppDelegate.window bringSubviewToFront:reader]
+ }
+*/
 
 - (IBAction)scanButtonTapped:(id)sender {
-    NSLog(@"===%s",__func__);
+    NSLog(@"%s",__func__);
+    [self.readerView.scanner setSymbology:ZBAR_I25 config:ZBAR_CFG_ENABLE to:0];
     [self.readerView start];
 }
 

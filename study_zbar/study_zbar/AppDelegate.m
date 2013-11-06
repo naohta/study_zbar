@@ -12,8 +12,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
     globalVarAppDelegate = self;
+
+    // http://stackoverflow.com/questions/10111369/unknown-class-zbarreaderview-in-interface-builder-file
+    // force view class to load so it may be referenced directly from NIB
+    [ZBarReaderView class];
+    
     return YES;
 }
 							
