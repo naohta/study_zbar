@@ -24,6 +24,7 @@
     NSLog(@"%s",__func__);
     [self.readerView.scanner setSymbology:ZBAR_I25 config:ZBAR_CFG_ENABLE to:0];
     [self.readerView start];
+    self.readerView.frame = CGRectMake(290, 0, 30, 30);
 }
 
 - (void) readerView: (ZBarReaderView*) view didReadSymbols: (ZBarSymbolSet*) syms fromImage: (UIImage*) img
