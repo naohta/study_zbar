@@ -26,33 +26,6 @@
 }
 
 
-- (void) readerView: (ZBarReaderView*) view
-     didReadSymbols: (ZBarSymbolSet*) syms
-          fromImage: (UIImage*) img
-{
-    NSLog(@"%s",__func__);
-    // do something useful with results
-    for(ZBarSymbol *sym in syms) {
-        self.resultText.text = sym.data;
-        break;
-    }
-}
-
-/*
-- (IBAction)scanButtonTapped_OLD2:(id)sender {
-    NSLog(@"%s",__func__);
-    ZBarImageScanner *scanner = [[ZBarImageScanner alloc] init];
-    [scanner setSymbology:ZBAR_I25 config:ZBAR_CFG_ENABLE to:0];
-    ZBarReaderView *reader = [[ZBarReaderView alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
-    //ZBarReaderView *reader = [[ZBarReaderView alloc] initWithImageScanner:scanner];
-    //[reader ]
-    reader.backgroundColor = [UIColor blueColor];
-    reader.readerDelegate = self;
-    [self.view addSubview:reader];
-    [globalVarAppDelegate.window bringSubviewToFront:reader]
- }
-*/
-
 - (IBAction)scanButtonTapped:(id)sender {
     NSLog(@"%s",__func__);
     [self.readerView.scanner setSymbology:ZBAR_I25 config:ZBAR_CFG_ENABLE to:0];
@@ -75,4 +48,20 @@
     self.resultText.text = barcodeText;
     [reader dismissViewControllerAnimated:YES completion:nil];
 }
+
+- (void) readerView: (ZBarReaderView*) view didReadSymbols: (ZBarSymbolSet*) syms fromImage: (UIImage*) img
+{
+    NSLog(@"%s",__func__);
+    NSMutableArray *ary = [@[] mutableCopy];
+    for(ZBarSymbol *sym in syms) [ary addObject:sym.data];
+    NSLog(@"%@",ary);
+    NSMutableString *txt = [@"" mutableCopy];
+    for (NSString *s in ary) {
+        [txt appendString:s];
+        [txt appendString:@"\n"];
+    }
+    self.resultText.text = txt;
+}
+
+
 @end
