@@ -1,5 +1,7 @@
 //  Copyright (c) 2013 Naohiro OHTA. All rights reserved.
 #import "ViewController.h"
+#import "AppDelegate.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface ViewController ()
 
@@ -10,7 +12,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    self.readerView.readerDelegate = self;
+    if(TARGET_IPHONE_SIMULATOR) {
+        self.cameraSim = [[ZBarCameraSimulator alloc]
+                     initWithViewController: self];
+        self.cameraSim.readerView = self.readerView;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -19,15 +26,44 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)scanButtonTapped:(id)sender {
+
+- (void) readerView: (ZBarReaderView*) view
+     didReadSymbols: (ZBarSymbolSet*) syms
+          fromImage: (UIImage*) img
+{
     NSLog(@"%s",__func__);
-    ZBarReaderViewController *reader = [ZBarReaderViewController new];
-    reader.readerDelegate = self;
-    reader.supportedOrientationsMask = ZBarOrientationMaskAll;
+    // do something useful with results
+    for(ZBarSymbol *sym in syms) {
+        self.resultText.text = sym.data;
+        break;
+    }
+}
+
+- (IBAction)scanButtonTapped_OLD2:(id)sender {
+    NSLog(@"%s",__func__);
     
-    ZBarImageScanner *scanner = reader.scanner;
+    ZBarImageScanner *scanner = [[ZBarImageScanner alloc] init];
     [scanner setSymbology:ZBAR_I25 config:ZBAR_CFG_ENABLE to:0];
-    [self presentViewController:reader animated:YES completion:nil];
+
+    ZBarReaderView *reader = [[ZBarReaderView alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
+    //ZBarReaderView *reader = [[ZBarReaderView alloc] initWithImageScanner:scanner];
+    //[reader ]
+    reader.backgroundColor = [UIColor blueColor];
+    reader.readerDelegate = self;
+    [self.view addSubview:reader];
+    [globalVarAppDelegate.window bringSubviewToFront:reader];
+}
+
+- (IBAction)scanButtonTapped___dd____:(id)sender {
+    NSLog(@"%s",__func__);
+    AVCaptureSession *session = [[AVCaptureSession alloc] init];
+    //ZBarCaptureReader
+    [session startRunning];
+}
+
+- (IBAction)scanButtonTapped:(id)sender {
+    NSLog(@"===%s",__func__);
+    [self.readerView start];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)reader didFinishPickingMediaWithInfo:(NSDictionary *)info
