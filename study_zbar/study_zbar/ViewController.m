@@ -31,6 +31,11 @@
     NSLog(@"%s",__func__);
     NSMutableArray *ary = [@[] mutableCopy];
     for(ZBarSymbol *sym in syms) [ary addObject:sym.data];
+    [self displayReadCodes:ary];
+}
+
+- (void) displayReadCodes: (NSArray*)ary
+{
     NSLog(@"%@",ary);
     NSMutableString *txt = [@"" mutableCopy];
     for (NSString *s in ary) {
@@ -39,6 +44,4 @@
     }
     self.resultText.text = txt;
 }
-
-
 @end
